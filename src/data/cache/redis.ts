@@ -1,23 +1,27 @@
 import { CacheInstance } from ".";
+import { createClient, RedisClientType } from 'redis';
 
 export class RedisCacheInstance implements CacheInstance {
-  cache: Map<string, any>;
+  cache: RedisClientType;
 
   private static instance: RedisCacheInstance;
 
   constructor() {
-    this.cache = new Map();
+    this.cache = createClient({
+      url: 'redis://default:redispw@localhost:49153'
+    });
+    this.cache.connect();
   }
 
-  setCache(key: string, value: any) {
-    this.cache.set(key, value)
+  async setCache(key: string, value: any) {
+    await this.cache.set(key, value)
   }
 
-  hasCache(key: string) {
-    return this.cache.has(key);
+  async hasCache(key: string) {
+    return !!(await this.cache.get(key))
   }
 
-  getCache(key: string) {
+  async getCache(key: string) {
     return this.cache.get(key);
   }
 
@@ -26,7 +30,7 @@ export class RedisCacheInstance implements CacheInstance {
       return this.instance;
 
     this.instance = new RedisCacheInstance;
-    
+
     return this.instance;
   }
 }
