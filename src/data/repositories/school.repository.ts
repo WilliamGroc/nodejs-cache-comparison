@@ -3,6 +3,6 @@ import { getSchool } from "../mock/school.mock";
 
 export class SchoolRepository {
   async getAll(): Promise<SchoolEntity[]> {
-    return new Array(2).fill('').map(getSchool);
+    return new Array(5).fill('').map(getSchool);
   }
 }

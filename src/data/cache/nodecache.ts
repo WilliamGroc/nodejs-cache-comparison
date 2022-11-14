@@ -7,7 +7,11 @@ export class NodeCacheInstance implements CacheInstance {
   private static instance: NodeCacheInstance;
 
   constructor() {
-    this.cache = new NodeCache();
+    this.cache = new NodeCache({ stdTTL: 60 * 60 });
+  }
+
+  async isExpired(key: string) {
+    return (this.cache.getTtl(key) || 0) > 0
   }
 
   async setCache(key: string, value: any) {

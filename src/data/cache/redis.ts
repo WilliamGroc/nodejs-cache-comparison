@@ -25,6 +25,10 @@ export class RedisCacheInstance implements CacheInstance {
     return this.cache.get(key);
   }
 
+  async isExpired(key: string){
+    return (await this.cache.expireTime(key)) > 0
+  }
+
   static getInstance(): CacheInstance {
     if (this.instance)
       return this.instance;
