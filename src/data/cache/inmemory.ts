@@ -1,6 +1,6 @@
 import { addMinutes, addSeconds } from "date-fns";
 import { CacheInstance } from ".";
-import fs from 'fs';
+import * as fs from 'fs';
 
 export class InMemoryCacheInstance implements CacheInstance {
   cache: Map<string, [any, Date]>;

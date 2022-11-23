@@ -1,8 +1,26 @@
-import { ClassrommEntity } from "./classroom.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ClassroomEntity } from "./classroom.entity";
 
-export interface SchoolEntity {
+@Entity()
+export class SchoolEntity {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column()
   name: string;
+
+  @CreateDateColumn()
   creationDate: Date;
-  classrooms: ClassrommEntity[];
+
+  @Column()
+  address: string;
+
+  @Column()
+  zipcode: string;
+
+  @Column()
+  country: string;
+
+  @OneToMany(() => ClassroomEntity, (entity) => entity.school, { cascade: true })
+  classrooms: ClassroomEntity[];
 }

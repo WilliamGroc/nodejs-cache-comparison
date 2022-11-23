@@ -1,6 +1,9 @@
-import express, { NextFunction, Request, Response } from 'express';
-import NodeCache from 'node-cache';
+import * as express from 'express';
 import routers from './api'
+import { AppDataSource } from "./data-source"
+
+
+AppDataSource.initialize()
 
 // Initialize the express engine
 const app: express.Application = express();

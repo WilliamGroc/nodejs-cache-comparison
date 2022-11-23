@@ -1,9 +1,9 @@
-import express from 'express'
+import * as express from 'express'
 import schoolRouter from './school/routes';
-import teacherRouter from './teacher/routes';
+import studentRouter from './student/routes';
 
 const router = express.Router();
 router.use('/school', schoolRouter)
-router.use('/teacher', teacherRouter)
+router.use('/student', studentRouter)
 
 export default router;
